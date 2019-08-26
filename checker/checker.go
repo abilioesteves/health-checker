@@ -23,7 +23,13 @@ type Checker struct {
 
 // HealthCheckResponse holds the information for a health check response
 type HealthCheckResponse struct {
-	Dependencies map[string]int `json:"dependencies"`
+	Dependencies map[string]DependencyStatus `json:"dependencies"`
+}
+
+// DependencyStatus holds the information of a dependency status
+type DependencyStatus struct {
+	Up  bool   `json:"up"`
+	Err string `json:"err"`
 }
 
 // InitFromBuilder inits the health checker agent from the Builder object
@@ -72,8 +78,12 @@ func (checker *Checker) RegisterProblem(err error) {
 
 // RegisterResponse registrates the health check response at the appropriate prometheus metric
 func (checker *Checker) RegisterResponse(resp HealthCheckResponse) {
-	for k, v := range resp.Dependencies {
-		checker.HealthMetric.WithLabelValues(checker.TargetName, k, "").Set(float64(v))
+	for k, depStatus := range resp.Dependencies {
+		value := 0.0
+		if depStatus.Up {
+			value = 1.0
+		}
+		checker.HealthMetric.WithLabelValues(checker.TargetName, k, depStatus.Err).Set(value)
 	}
 	checker.HealthMetric.WithLabelValues(checker.TargetName, "self", "").Set(1)
 }

@@ -9,7 +9,10 @@ The behavior of this endpoint is completely undefined, but requires the followin
 ```
 {
     "dependencies": {
-        "key": "0|1", # 0 meaning the dependency is down or unreacheable, 1 meaning dependecy is up and reacheable
+        "key": {
+            "up": bool, # false meaning the dependency is down or unreacheable, true meaning dependecy is up and reacheable
+            "err": string
+        }, 
     }
 }
 ```
