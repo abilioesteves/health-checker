@@ -14,4 +14,4 @@ FROM alpine
 
 COPY --from=builder /hc /
 
-CMD [ "/hc", "serve" ]
+CMD [ "/hc", "start" ]
