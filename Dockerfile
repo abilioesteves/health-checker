@@ -14,4 +14,8 @@ FROM alpine
 
 COPY --from=builder /hc /
 
+ENV HC_PORT "37441"
+ENV HC_LOG_LEVEL "info"
+ENV HC_HEALTH_URL ""
+
 CMD [ "/hc", "start" ]
