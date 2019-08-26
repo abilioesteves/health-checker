@@ -16,6 +16,7 @@ COPY --from=builder /hc /
 
 ENV HC_PORT "37441"
 ENV HC_LOG_LEVEL "info"
-ENV HC_HEALTH_URL ""
+ENV HC_TARGET_HEALTH_URL ""
+ENV HC_TARGET_NAME ""
 
 CMD [ "/hc", "start" ]

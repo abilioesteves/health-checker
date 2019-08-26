@@ -10,5 +10,6 @@ services:
     environment:
       - HC_PORT=37441
       - HC_LOG_LEVEL=debug
-      - HC_HEALTH_URL=http://localhost:37441/health
+      - HC_TARGET_HEALTH_URL=http://localhost:37441/health
+      - HC_TARGET_NAME="Health Checker"
     restart: on-failure

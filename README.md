@@ -25,7 +25,7 @@ docker-compose up -d local
 Or build this application with `go build` and launch it by running:
 
 ```
-./health-checker start --log-level debug --health-url http://<target>:<port>/health
+./health-checker start --log-level debug --target-health-url http://localhost:37441/health --target-name health-checker
 ```
 
 Where `<target>` and `<port>` reflect user defines values for the target base url and port.

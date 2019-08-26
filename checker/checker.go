@@ -45,7 +45,7 @@ func (checker *Checker) Run() {
 	ticker := time.NewTicker(duration)
 	defer ticker.Stop()
 
-	logrus.Infof("Started checker agent...")
+	logrus.Infof("Started checker agent")
 	for {
 		select {
 		case <-ticker.C:
@@ -73,14 +73,14 @@ func (checker *Checker) RegisterProblem(err error) {
 // RegisterResponse registrates the health check response at the appropriate prometheus metric
 func (checker *Checker) RegisterResponse(resp HealthCheckResponse) {
 	for k, v := range resp.Dependencies {
-		checker.HealthMetric.WithLabelValues(k, "").Set(float64(v))
+		checker.HealthMetric.WithLabelValues(checker.TargetName, k, "").Set(float64(v))
 	}
-	checker.HealthMetric.WithLabelValues("self", "").Set(1)
+	checker.HealthMetric.WithLabelValues(checker.TargetName, "self", "").Set(1)
 }
 
 // CheckHealth calls the health endpoint
 func (checker *Checker) CheckHealth() (toReturn HealthCheckResponse, err error) {
-	httpClient, err := gohclient.New(nil, checker.HealthURL)
+	httpClient, err := gohclient.New(nil, checker.TargetHealthURL)
 	httpResp, data, err := httpClient.Get("")
 
 	if httpResp.StatusCode == http.StatusOK {
@@ -88,12 +88,12 @@ func (checker *Checker) CheckHealth() (toReturn HealthCheckResponse, err error) 
 			if err = json.Unmarshal(data, &toReturn); err == nil {
 				return
 			}
-			err = fmt.Errorf("Health Check '%v': Unable to read response", checker.HealthURL)
+			err = fmt.Errorf("Health Check '%v': Unable to read response", checker.TargetHealthURL)
 		} else {
-			err = fmt.Errorf("Health Check '%v': Unable to communicate", checker.HealthURL)
+			err = fmt.Errorf("Health Check '%v': Unable to communicate", checker.TargetHealthURL)
 		}
 	} else {
-		err = fmt.Errorf("Health Check '%v': Not 200 OK; Getting %v", checker.HealthURL, httpResp.StatusCode)
+		err = fmt.Errorf("Health Check '%v': Not 200 OK; Getting %v", checker.TargetHealthURL, httpResp.StatusCode)
 	}
 
 	return
