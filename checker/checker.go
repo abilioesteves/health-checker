@@ -83,17 +83,21 @@ func (checker *Checker) CheckHealth() (toReturn HealthCheckResponse, err error) 
 	httpClient, err := gohclient.New(nil, checker.TargetHealthURL)
 	httpResp, data, err := httpClient.Get("")
 
-	if httpResp.StatusCode == http.StatusOK {
-		if err == nil {
-			if err = json.Unmarshal(data, &toReturn); err == nil {
-				return
+	if httpResp != nil {
+		if httpResp.StatusCode == http.StatusOK {
+			if err == nil {
+				if err = json.Unmarshal(data, &toReturn); err == nil {
+					return
+				}
+				err = fmt.Errorf("Health Check '%v': Unable to read response", checker.TargetHealthURL)
+			} else {
+				err = fmt.Errorf("Health Check '%v': Unable to communicate", checker.TargetHealthURL)
 			}
-			err = fmt.Errorf("Health Check '%v': Unable to read response", checker.TargetHealthURL)
 		} else {
-			err = fmt.Errorf("Health Check '%v': Unable to communicate", checker.TargetHealthURL)
+			err = fmt.Errorf("Health Check '%v': Not 200 OK; Getting %v", checker.TargetHealthURL, httpResp.StatusCode)
 		}
 	} else {
-		err = fmt.Errorf("Health Check '%v': Not 200 OK; Getting %v", checker.TargetHealthURL, httpResp.StatusCode)
+		err = fmt.Errorf("Health Check '%v': Not possible to communicate with server: %v", checker.TargetHealthURL, err)
 	}
 
 	return
