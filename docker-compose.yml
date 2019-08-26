@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+
+  health_checker:
+    build: .
+    image: labbsr0x/health-checker:latest
+    ports:
+      - "37441:37441"
+    environment:
+      - HC_PORT=37441
+      - HC_LOG_LEVEL=debug
+      - HC_METRICS_URL=http://localhost:37441/health
+    restart: on-failure
