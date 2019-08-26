@@ -8,7 +8,6 @@ The behavior of this endpoint is completely undefined, but requires the followin
 
 ```
 {
-    "service": "", # name of the service being watched
     "dependencies": {
         "key": "0|1", # 0 meaning the dependency is down or unreacheable, 1 meaning dependecy is up and reacheable
     }
