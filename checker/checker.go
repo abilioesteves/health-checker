@@ -67,7 +67,7 @@ func (checker *Checker) Run() {
 
 // RegisterProblem registrates at the appropriate metric that a problem communicating with the target service exists
 func (checker *Checker) RegisterProblem(err error) {
-	checker.HealthMetric.WithLabelValues("self", err.Error()).Set(0)
+	checker.HealthMetric.WithLabelValues(checker.TargetName, "self", err.Error()).Set(0)
 }
 
 // RegisterResponse registrates the health check response at the appropriate prometheus metric
@@ -81,6 +81,7 @@ func (checker *Checker) RegisterResponse(resp HealthCheckResponse) {
 // CheckHealth calls the health endpoint
 func (checker *Checker) CheckHealth() (toReturn HealthCheckResponse, err error) {
 	httpClient, err := gohclient.New(nil, checker.TargetHealthURL)
+
 	httpResp, data, err := httpClient.Get("")
 
 	if httpResp != nil {
