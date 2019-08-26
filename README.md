@@ -16,7 +16,7 @@ The behavior of this endpoint is completely undefined, but requires the followin
 
 # Developer
 
-Launch it dast by running:
+Launch it fast by running:
 
 ```
 docker-compose up -d local
