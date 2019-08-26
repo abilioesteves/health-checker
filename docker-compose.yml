@@ -10,5 +10,5 @@ services:
     environment:
       - HC_PORT=37441
       - HC_LOG_LEVEL=debug
-      - HC_METRICS_URL=http://localhost:37441/health
+      - HC_HEALTH_URL=http://localhost:37441/health
     restart: on-failure

@@ -56,6 +56,6 @@ func (b *Builder) InitFromViper(v *viper.Viper) *Builder {
 func (flags *Flags) check() {
 
 	if flags.HealthURL == "" {
-		panic("metrics-url cannot be empty")
+		panic("health-url cannot be empty")
 	}
 }
