@@ -9,8 +9,8 @@ import (
 
 	"github.com/labbsr0x/goh/gohclient"
 
+	"github.com/abilioesteves/health-checker/config"
 	"github.com/labbsr0x/goh/gohcmd"
-	"github.com/labbsr0x/health-checker/config"
 	"github.com/sirupsen/logrus"
 )
 

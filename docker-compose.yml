@@ -4,7 +4,7 @@ services:
 
   health_checker:
     build: .
-    image: labbsr0x/health-checker:latest
+    image: abilioesteves/health-checker:latest
     ports:
       - "37441:37441"
     environment:

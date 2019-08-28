@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/labbsr0x/health-checker/version"
+	"github.com/abilioesteves/health-checker/version"
 	"github.com/spf13/cobra"
 )
 

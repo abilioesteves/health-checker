@@ -6,10 +6,10 @@ import (
 
 	"github.com/labbsr0x/goh/gohserver"
 
-	"github.com/labbsr0x/health-checker/checker"
+	"github.com/abilioesteves/health-checker/checker"
 
+	"github.com/abilioesteves/health-checker/config"
 	"github.com/gorilla/mux"
-	"github.com/labbsr0x/health-checker/config"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/sirupsen/logrus"
 )

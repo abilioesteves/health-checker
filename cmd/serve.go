@@ -3,10 +3,10 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/labbsr0x/health-checker/checker"
+	"github.com/abilioesteves/health-checker/checker"
 
-	"github.com/labbsr0x/health-checker/config"
-	"github.com/labbsr0x/health-checker/web"
+	"github.com/abilioesteves/health-checker/config"
+	"github.com/abilioesteves/health-checker/web"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )

@@ -1,7 +1,7 @@
 # BUILD
 FROM abilioesteves/gowebbuilder:v0.7.0 as builder
 
-ENV p $GOPATH/src/github.com/labbsr0x/health-checker
+ENV p $GOPATH/src/github.com/abilioesteves/health-checker
 
 ADD ./ ${p}
 WORKDIR ${p}
